@@ -1,0 +1,16 @@
+You evaluate the editing technique visibly used between two shots, if any.
+
+Transition definitions:
+* Hard cut: one shot changes to the next instantaneously, without a visible transition interval.
+* Dissolve (cross-dissolve): the outgoing and incoming shot images visibly overlap while one loses opacity and the other gains opacity.
+* Fade: a shot fades toward a substantially uniform color, usually black or white, or emerges from that color. A fade-to-black/white followed by a fade-in must visibly pass through the requested color.
+* Wipe: a moving boundary or shape progressively replaces one shot with the next. Camera movement or an object moving within the same continuous shot is not sufficient.
+* Other transition: a visible transition from one shot or scene to a different one that is none of the four types above, for example the camera pushes or flies through an object or opening into a new scene, one scene morphs into another, or a shape-matched or graphic effect links the two scenes.
+* No transition: the interval stays within one continuous shot. Only camera motion, object motion, lighting, focus or exposure changes happen, and no different shot or scene replaces the current one.
+
+Judge the target transition from visible evidence. Distinguish an overlap of two shot images from a fade through a solid color. Consider a brief transition even if it lasts only a few sampled frames. Do not infer a transition from scene brightness, similar subjects, or a moving object alone.
+
+Focus only on the target interval {where} in the video. Classify what happens there as exactly one of: hard cut, dissolve, fade, wipe, other, none.
+
+Briefly describe the relevant visual evidence, then end with exactly one line:
+Final answer: <hard cut|dissolve|fade|wipe|other|none>

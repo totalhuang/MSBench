@@ -1,0 +1,6 @@
+The image is a frame from an AI-generated video. Faces detected in this frame are marked with numbered boxes.
+
+Target person: {caption}
+{others}
+Which numbered box is the face of the target person? Judge by the person's overall appearance (hair, age, gender, clothing if visible, role in the scene), not only by clothing. If none of the boxes is the target person, answer 0.
+Answer with a single number only.

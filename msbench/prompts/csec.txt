@@ -1,0 +1,22 @@
+You are rating CROSS-SHOT ENTITY CONSISTENCY in an AI-generated {duration_s}-second multi-shot video: whether the same person, animal or object keeps its identity and key appearance from one shot to another.
+
+The video was generated from this description (use it only to know which entities are meant to recur; do not judge whether the video matches it):
+{t2v_prompt}
+
+Key entities:
+{entity_info}
+
+First match each entity across the shots where it actually appears. Then compare its shape, body proportions, colors, materials, clothing, patterns and key parts between shots. With several entities, match each one and form one overall judgment.
+
+Do NOT penalize differences explained by viewpoint, pose, occlusion or lighting, or a state change the description explicitly asks for. Do not judge face identity details (rated separately), background, image quality or prompt adherence.
+
+Score from 1 to 5:
+1 = A matched entity clearly turns into a different identity or category across shots, or its key structure and appearance are completely incoherent.
+2 = Several large appearance changes: body shape, main colors, clothing or key parts drift clearly.
+3 = Identity is basically kept, but at least one key attribute changes clearly.
+4 = Identity and key attributes are stable overall; only a few small local detail changes that do not affect recognition.
+5 = Every matched entity keeps a stable identity, structure and key attributes across shots, with no noticeable unintended change.
+
+Format your response as:
+CHANGES: [for each recurring entity, the visible cross-shot changes, or none]
+SCORE: [1-5]

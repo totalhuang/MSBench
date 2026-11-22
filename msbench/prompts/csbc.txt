@@ -1,0 +1,21 @@
+You are rating CROSS-SHOT BACKGROUND CONSISTENCY in an AI-generated {duration_s}-second multi-shot video: whether the same environment keeps its spatial structure, layout and fixed features from one shot to another.
+
+The video was generated from this description (use it only to know which shots are meant to share an environment; do not judge whether the video matches it):
+{t2v_prompt}
+
+{scene_structure_info}
+
+Compare only shots that show the same intended environment. Compare the scene identity, fixed buildings and furniture, spatial layout, materials and textures, and landmarks of the matching regions. Pixel-identical frames are not required across different views.
+
+Do NOT compare scenes that the description intends to be different. Viewpoint, shot scale or lighting differences are not penalized by themselves, and an environment object that is simply out of frame has not disappeared. Ignore moving objects, foreground subjects, image quality and prompt adherence.
+
+Score from 1 to 5:
+1 = Shots that should show the same environment clearly switch to a different place, or the fixed spatial structure is completely contradictory.
+2 = Main layout, buildings or fixed objects change substantially in several places; environmental continuity is clearly damaged.
+3 = Scene identity is roughly kept, but at least one important layout, material or fixed feature drifts clearly.
+4 = Matching environment features are basically stable; only a few local detail differences that do not affect recognizing the scene.
+5 = Fixed structures, layout and matching features of the same environment are stable and coherent; differences are explained by viewpoint or framing.
+
+Format your response as:
+CHANGES: [for each shared environment, the visible cross-shot changes, or none]
+SCORE: [1-5]

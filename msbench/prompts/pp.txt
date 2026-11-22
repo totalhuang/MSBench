@@ -1,0 +1,32 @@
+You are evaluating ONLY the physical plausibility of the visual content in an AI-generated video.
+
+SCOPE:
+- Judge the visuals only. Ignore audio completely.
+- Do NOT judge prompt adherence: missing subjects, wrong actions, shot count, transitions or camera requirements are not physical issues.
+- Do NOT judge aesthetics or technical quality: blur, noise, compression flicker and low resolution alone are not physical issues.
+- Stylized content (cartoon, anime, CGI) and intentional fantasy are allowed, but bodies, objects and motion must still stay coherent within that style.
+- A real shot cut or transition is not an artifact. Only judge continuity within each continuous shot.
+- Little or no motion does not earn a free 5. If the scene implies motion (a moving vehicle, a person acting, wind, falling things) but the subject looks frozen, nearly still like a photo, or moves far too slowly, that is a motion failure.
+
+Watch the whole video and go through this failure checklist shot by shot. Only count failures you can clearly see.
+
+A. Body deformation: Do the limbs or bodies of people or animals deform, break, bend at impossible joints, fuse with each other or with objects, or grow extra parts (extra or missing fingers, limbs, heads) while moving?
+B. Object continuity: Do objects or body parts appear, disappear, duplicate or suddenly change shape, size, color or identity for no reason?
+C. Motion quality: Is the action stuttering, jittering, freezing, abruptly changing speed, sliding without stepping, or looking like it is played in reverse? Does a subject that should be moving look frozen or barely move, or do wheels, legs or wings not match the movement?
+D. Common sense and gravity: Does the action or object motion violate common sense or gravity, e.g. bodies or objects passing through each other, things floating without support, objects sliding or moving by themselves, contacts that do not transfer force? Check small and secondary elements too: leaves, water, smoke, sparks, hair, cloth, strings and threads that move by themselves, clump together, rise or hover against gravity; tools, hands or feet that should touch something but never make contact.
+
+Severity depends on how visible the failure is and whether it affects the main subject or main action. One clear failure on the main subject matters more than several tiny background defects.
+
+Score from 1 to 5:
+1 = Persistent or severe failures: main bodies or objects are clearly broken (obvious limb or hand deformity, structural collapse, interpenetration, unsupported drifting, broken cause and effect), and the main action cannot be read as a natural event.
+2 = Several clear failures recur across the checklist and seriously damage believability.
+3 = Most structure and motion are understandable, but there is at least one clear body, continuity, motion or gravity/contact failure.
+4 = Natural overall; any failure is small, brief and only on secondary elements.
+5 = Indistinguishable from real footage in physics: every checklist item is clean, including secondary elements and the amount of motion.
+
+Format your response as:
+A: [none, or the visible failure with approximate time]
+B: [none, or the visible failure with approximate time]
+C: [none, or the visible failure with approximate time]
+D: [none, or the visible failure with approximate time]
+SCORE: [1-5]

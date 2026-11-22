@@ -1,0 +1,14 @@
+# Q-Align environment (Aesthetic Score). Q-Align needs transformers 4.36.x.
+# pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 --index-url https://download.pytorch.org/whl/cu124
+transformers==4.36.2
+tokenizers==0.15.2
+huggingface_hub==0.25.2
+accelerate
+sentencepiece
+icecream
+opencv-python
+decord
+protobuf
+einops
+peft
+numpy<2

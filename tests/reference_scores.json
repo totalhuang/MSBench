@@ -1,0 +1,86 @@
+{
+ "description": "Scores of the two example videos in the paper run (Seedance 2.0). Expert-model metrics should reproduce closely; VLM-judge metrics (physical, vqa, entity, background, face) vary with sampling and judge deployment.",
+ "videos": {
+  "2e170ee68cbed59376c7f3dd44fb2a78": {
+   "scores": {
+    "aesthetic": 0.9953,
+    "perceptual": 0.8349,
+    "dynamic_degree": 3.629,
+    "physical": 4.939,
+    "vqa": 0.9491,
+    "tc": 1.0,
+    "cta": 0.7295,
+    "camera_control": 0.7222,
+    "entity": 5.0,
+    "background": 4.9797,
+    "face": 0.9437,
+    "VQ": 0.9151,
+    "DQ": 0.821,
+    "SA": 0.8502,
+    "CSC": 0.9795,
+    "final": 0.8915
+   },
+   "n_shots_detected": 3,
+   "events": [
+    [
+     1.78,
+     3.08,
+     "fade"
+    ],
+    [
+     5.46,
+     5.46,
+     "hard cut"
+    ]
+   ]
+  },
+  "d5a9e6db7d3747c5a2578cbe930d7594": {
+   "scores": {
+    "aesthetic": 0.9832,
+    "perceptual": 0.8002,
+    "dynamic_degree": 3.3923,
+    "physical": 4.9556,
+    "vqa": 0.8919,
+    "tc": 1.0,
+    "cta": 0.7438,
+    "camera_control": 0.6481,
+    "entity": 4.9997,
+    "background": 4.9876,
+    "face": 0.9467,
+    "VQ": 0.8917,
+    "DQ": 0.7935,
+    "SA": 0.821,
+    "CSC": 0.9812,
+    "final": 0.8718
+   },
+   "n_shots_detected": 6,
+   "events": [
+    [
+     2.0,
+     2.6,
+     "wipe"
+    ],
+    [
+     5.42,
+     5.42,
+     "hard cut"
+    ],
+    [
+     7.88,
+     7.88,
+     "hard cut"
+    ],
+    [
+     10.96,
+     10.96,
+     "hard cut"
+    ],
+    [
+     12.08,
+     13.08,
+     "wipe"
+    ]
+   ]
+  }
+ }
+}

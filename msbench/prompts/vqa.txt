@@ -1,0 +1,5 @@
+This is a video of {duration} seconds.
+Answer each of the following questions with yes or no, judging only from what is visible in this video.
+A question that starts with "(Judge only the time window A s to B s of the video.)" is about that window only: time is measured in seconds from the start of the video; use only the frames inside the window and ignore everything outside it. All other questions are about the entire video.
+{questions}
+Reply with exactly one line per question, in the form "1. yes" or "1. no", and nothing else.

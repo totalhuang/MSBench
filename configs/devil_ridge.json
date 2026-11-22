@@ -1,0 +1,56 @@
+{
+  "description": "Dynamic Degree = intercept + sum_i w_i * sign_i * (x_i - mu_i) / sd_i over the equal-weight shot means x_i of the seven DEVIL components. mu / sd: all 3,950 videos evaluated in the paper; w, intercept: ridge regression (lambda = 1) on the human Dynamic Degree MOS of 218 videos. Output on the 1-5 MOS scale.",
+  "components": [
+    "flow",
+    "ssim",
+    "phash",
+    "dino_segm_dist",
+    "viclip_segm_dist",
+    "info_dino",
+    "temporal_entropy"
+  ],
+  "sign": [
+    1.0,
+    -1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+  ],
+  "mu": [
+    4.698468507401962,
+    0.7725081237203446,
+    5.006814966504319,
+    0.3877109097484932,
+    0.048232416226642476,
+    0.05577864989823702,
+    10027.815902953584
+  ],
+  "sd": [
+    5.162828321809797,
+    0.1495487471122564,
+    3.5035756392686683,
+    0.17668148446249332,
+    0.05013370259750016,
+    0.0526494513415516,
+    7723.613921755107
+  ],
+  "w": [
+    -0.1570047483851077,
+    0.3544573576184524,
+    0.37539917068283934,
+    0.10320252585169444,
+    -0.3105018556713673,
+    0.33416376127008246,
+    -0.08502558261477437
+  ],
+  "intercept": 3.4282230229589796,
+  "lambda": 1.0,
+  "n_train": 218,
+  "cross_validation": {
+    "scheme": "5-fold grouped by script group, 100 random partitions",
+    "video_srcc_mean": 0.6072,
+    "model_srcc_mean": 0.6938
+  }
+}

@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "msbench"
+version = "1.0.0"
+description = "Evaluation toolkit for text-driven multi-shot video generation"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+
+[project.scripts]
+msbench = "msbench.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["msbench*"]
+
+[tool.setuptools.package-data]
+msbench = ["prompts/*.txt"]
