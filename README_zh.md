@@ -10,7 +10,7 @@ Sifan Zuo<sup>1</sup>, Beiming Yu<sup>1</sup>, Taojin Liu<sup>1</sup>, Zhuoyang 
 <sup>1</sup>天津大学 &nbsp;&nbsp; <sup>2</sup>北京大学
 
 <a href="https://totalhuang.github.io/MSBench-page/"><img src="https://img.shields.io/badge/Project-Page-blue"></a>
-<a href="https://arxiv.org/abs/XXXX.XXXXX"><img src="https://img.shields.io/badge/arXiv-XXXX.XXXXX-b31b1b"></a>
+<a href="https://arxiv.org/abs/2611.29417"><img src="https://img.shields.io/badge/arXiv-2611.29417-b31b1b"></a>
 <a href="https://huggingface.co/datasets/totalhuang/MSBench"><img src="https://img.shields.io/badge/🤗%20Dataset-MSBench-yellow"></a>
 
 </div>
@@ -23,7 +23,7 @@ Sifan Zuo<sup>1</sup>, Beiming Yu<sup>1</sup>, Taojin Liu<sup>1</sup>, Zhuoyang 
 
 ## ✅ 待办
 
-- [x] 开源论文（[arXiv](https://arxiv.org/abs/XXXX.XXXXX)）
+- [x] 开源论文（[arXiv](https://arxiv.org/abs/2611.29417)）
 - [x] 开源评测代码
 - [x] 开源评测数据集 prompts（300 条 4 s / 8 s / 15 s 脚本，[Hugging Face](https://huggingface.co/datasets/totalhuang/MSBench)）
 - [ ] 开源被测系统的评测视频
@@ -140,10 +140,13 @@ bash scripts/evaluate.sh my_model videos/my_model --judge-backend openai --judge
 
 ```bibtex
 @article{huang2026msbench,
-  title   = {MSBench: Benchmarking Script-Controlled Multi-Shot Text-to-Video Generation},
-  author  = {Huang, Tao and Liang, ZiHao and Liu, Junhao and Li, Junzhe and Wei, Yuancheng and
-             Zuo, Sifan and Yu, Beiming and Liu, Taojin and Li, Zhuoyang and Cao, Bing},
-  journal = {arXiv preprint arXiv:XXXX.XXXXX},
-  year    = {2026}
+  title         = {MSBench: Benchmarking Script-Controlled Multi-Shot Text-to-Video Generation},
+  author        = {Huang, Tao and Liang, ZiHao and Liu, Junhao and Li, Junzhe and Wei, Yuancheng and
+                   Zuo, Sifan and Yu, Beiming and Liu, Taojin and Li, Zhuoyang and Cao, Bing},
+  journal       = {arXiv preprint arXiv:2611.29417},
+  eprint        = {2611.29417},
+  archivePrefix = {arXiv},
+  primaryClass  = {cs.CV},
+  year          = {2026}
 }
 ```
