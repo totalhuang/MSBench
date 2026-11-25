@@ -1,5 +1,5 @@
 # Main environment: transitions (OmniShotCut, TransVLM), DEVIL, FilmOps, InsightFace, judge-based metrics, aggregation.
-# Install torch first:  pip install torch==2.8.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+# Install torch first:  pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu126
 numpy==1.26.4
 opencv-python>=4.8.0
 pillow>=10.0.0

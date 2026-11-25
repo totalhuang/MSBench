@@ -10,5 +10,5 @@ opencv-python
 decord
 protobuf
 einops
-peft
+peft==0.10.0
 numpy<2

@@ -46,8 +46,10 @@ Linux + NVIDIA GPU（单张 48 GB 卡可以跑全部模型）、Python 3.10、CU
 
 ```bash
 bash scripts/setup_third_party.sh   # 克隆 OmniShotCut、TransVLM、DEVIL、dinov2、FilmOps、Q-Align
-bash scripts/download_models.sh     # 约 80 GB 权重，放到 models/
+bash scripts/download_models.sh     # 约 78 GB 权重，放到 models/（已通过 --include/--exclude 仅下载评测所需子权重）
 ```
+
+> `download_models.sh` 仅拉取 MSBench 实际用到的部分权重（如 `Neo961/FilmOps` 仅下 `shot_scale`、`camera_angle`、`camera_movement`，`DeQA-Score-Mix3` 仅下 `safetensors`）；另外需将 `princeton-vl/RAFT` 的 `raft-things.pth` 手动放进 `models/DEVIL/`。
 
 ## 🤖 VLM 评委
 

@@ -95,7 +95,7 @@ git clone https://github.com/totalhuang/MSBench.git MSBench && cd MSBench
 
 # main environment
 conda create -n msbench python=3.10 -y && conda activate msbench
-pip install torch==2.8.0 torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126
+pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu126
 pip install -r requirements/main.txt && pip install -e .
 bash scripts/setup_third_party.sh          # OmniShotCut, TransVLM, DEVIL, dinov2, FilmOps, Q-Align -> third_party/
 
@@ -112,11 +112,16 @@ pip install -r requirements/deqa.txt && pip install -e .
 
 ## 🧱 Download
 
-**Expert models** (about 80 GB, into `models/`):
+**Expert models** (about 78 GB, into `models/`):
 
 ```bash
 bash scripts/download_models.sh
 ```
+
+The script uses `hf download --include` / `--exclude` to fetch only the weights required by MSBench (e.g. only
+`shot_scale`, `camera_angle`, and `camera_movement` from `Neo961/FilmOps`, and `safetensors` only from
+`zhiyuanyou/DeQA-Score-Mix3`). `raft-things.pth` from `princeton-vl/RAFT` still needs to be placed in `models/DEVIL/`
+manually (see `models/README.md`).
 
 **Benchmark scripts.** `data/benchmark.json` (300 scripts) ships with the repository; the same scripts are on
 [Hugging Face](https://huggingface.co/datasets/totalhuang/MSBench). Each key is a sample id; a script has `global_context`, `entities_info`, `shot_sequence`
