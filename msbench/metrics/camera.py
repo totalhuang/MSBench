@@ -5,13 +5,42 @@ int(len * 2))`` frames at the bin centres) and the movement of a lossless clip o
 compared with detected shot i (order matching); a planned shot without a detected counterpart scores 0.
 FilmOps labels are mapped to the MSBench vocabulary with partial credit for neighbouring classes (tables below,
 fixed before looking at any human score). Camera Control = mean of scale, angle and movement similarity.
+
+The movement clip is lossless FFV1 written with 24 slices and decoded by FilmOps with several decord threads
+(MSB_DECORD_THREADS, default 16). A single-slice clip decodes single-threaded at ~0.12 s per 1080p frame, which left
+the GPU idle most of the time; the sliced clip decodes to the same pixels.
 """
+import contextlib
+import os
+import subprocess
 import sys
 import tempfile
 
 from .. import common as C
-from .devil import cut_clip
 from .visual import NA
+
+
+def cut_clip_sliced(video_path, a, b, out):
+    """Lossless FFV1 clip of [a, b] s with 24 slices, so that it can be decoded in parallel."""
+    subprocess.run(['ffmpeg', '-nostdin', '-v', 'error', '-threads', '4', '-i', video_path, '-ss', str(a), '-t', str(b - a),
+                    '-an', '-c:v', 'ffv1', '-level', '3', '-slices', '24', '-threads', '8', '-pix_fmt', 'bgr0', '-y', out],
+                   check=True)
+
+
+@contextlib.contextmanager
+def decord_threads(n=None):
+    """Open every decord.VideoReader inside the block with n decode threads (FilmOps hard-codes num_threads=1)."""
+    import decord
+    n = int(os.environ.get('MSB_DECORD_THREADS', 16)) if n is None else n
+    orig = decord.VideoReader
+
+    def reader(path, ctx=decord.cpu(0), num_threads=1, **kw):
+        return orig(path, ctx=ctx, num_threads=n, **kw)
+    decord.VideoReader = reader
+    try:
+        yield
+    finally:
+        decord.VideoReader = orig
 
 SCALE_AXIS = ['extreme-close-up', 'close-up', 'medium-close-up', 'medium', 'medium-long', 'full', 'long']
 FO_SCALE_POS = {'Extreme Close-Up': 0.0, 'Close-Up': 1.0, 'Close Shot': 2.0, 'Medium Shot': 3.0, 'Medium Full Shot': 4.0,
@@ -110,8 +139,9 @@ class FilmOps:
                 frames.append({'frame': idx[k], 'scale': r.get('shot_scale', {}).get('labels'), 'angle': r.get('camera_angle', {}).get('labels'),
                                'angle_raw': {k2: [v[0], float(v[1])] for k2, v in r.get('camera_angle', {}).get('raw', {}).items()}})
             clip = f'{tmp}/shot.mkv'
-            cut_clip(path, a, b, clip)
-            mv = self.p.analyse_video(clip).get('camera_movement', {})
+            cut_clip_sliced(path, a, b, clip)
+            with decord_threads():
+                mv = self.p.analyse_video(clip).get('camera_movement', {})
         if 'error' in mv:
             raise NA('camera_movement error: ' + str(mv['error']))
         return {'frames': frames, 'movement': mv.get('labels'), 'movement_raw': mv.get('raw')}
