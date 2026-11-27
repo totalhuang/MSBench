@@ -19,6 +19,7 @@ Sifan Zuo<sup>1</sup>, Beiming Yu<sup>1</sup>, Taojin Liu<sup>1</sup>, Zhuoyang 
 
 ## 🔥 新闻
 
+- **[2026.11]** 🏆 新增评测 MAGI-2（Sand.ai），基础集 Final 82.1（15 s 为 81.2），位列榜单第一。
 - **[2026.11]** 🎉 发布论文、评测代码与 300 条评测 prompts。
 
 ## ✅ 待办

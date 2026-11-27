@@ -19,6 +19,7 @@ Sifan Zuo<sup>1</sup>, Beiming Yu<sup>1</sup>, Taojin Liu<sup>1</sup>, Zhuoyang 
 
 ## 🔥 News
 
+- **[2026.11]** 🏆 We evaluate MAGI-2 (Sand.ai), which tops the leaderboard with a base-set Final of 82.1 (81.2 on 15 s).
 - **[2026.11]** 🎉 We release the paper, the evaluation code and the 300 benchmark prompts.
 
 ## ✅ TODO List
@@ -51,20 +52,21 @@ Base set (250 scripts of 4 s and 8 s); scores in [0, 100], Final = mean of the f
 
 | # | System | Type | Open weights | VQ | DQ | SA | CSC | **Final** | 15 s Final |
 |---:|---|---|:---:|---:|---:|---:|---:|---:|---:|
-| 1 | Seedance 2.0 | Native multi-shot |  | 83.9 | 77.0 | 73.6 | 84.0 | **79.6** | 79.2 |
-| 2 | MiniMax H3 | Native multi-shot | ✓ | 85.7 | 79.0 | 72.1 | 78.9 | **78.9** | 79.5 |
-| 3 | Kling 3.0 | Native multi-shot |  | 80.7 | 76.9 | 66.5 | 73.0 | **74.3** | 77.4 |
-| 4 | Wan2.6 | Native multi-shot |  | 87.7 | 77.3 | 57.8 | 61.7 | **71.1** | 77.1 |
-| 5 | Veo3.1 | Native multi-shot |  | 88.5 | 67.7 | 61.9 | 66.1 | **71.1** | - |
-| 6 | Sora2 Pro | Native multi-shot |  | 71.8 | 68.4 | 69.7 | 74.1 | **71.0** | - |
-| 7 | Jimeng3.0 Pro | Native multi-shot |  | 89.4 | 77.0 | 52.1 | 57.2 | **68.9** | - |
-| 8 | HoloCine | Multi-shot specialist | ✓ | 71.5 | 72.6 | 61.0 | 66.0 | **67.8** | 68.6 |
-| 9 | MultiShotMaster | Multi-shot specialist | ✓ | 80.5 | 62.4 | 62.6 | 61.8 | **66.8** | 70.8 |
-| 10 | VideoGen-of-Thought | Multi-shot specialist | ✓ | 89.0 | 54.2 | 52.1 | 44.9 | **60.0** | 60.0 |
-| 11 | Wan2.2 | Conventional T2V | ✓ | 85.5 | 78.7 | 38.7 | 31.0 | **58.5** | 48.5 |
-| 12 | Kling 2.6 | Conventional T2V |  | 85.7 | 75.8 | 35.9 | 18.2 | **53.9** | - |
-| 13 | HunyuanVideo-1.5 | Conventional T2V | ✓ | 81.7 | 75.5 | 34.5 | 19.9 | **52.9** | 46.0 |
-| 14 | Hailuo 2.3 | Conventional T2V |  | 77.9 | 77.3 | 31.9 | 12.1 | **49.8** | - |
+| 1 | MAGI-2 | Native multi-shot |  | 89.2 | 81.0 | 78.5 | 79.7 | **82.1** | 81.2 |
+| 2 | Seedance 2.0 | Native multi-shot |  | 83.9 | 77.0 | 73.6 | 84.0 | **79.6** | 79.2 |
+| 3 | MiniMax H3 | Native multi-shot | ✓ | 85.7 | 79.0 | 72.1 | 78.9 | **78.9** | 79.5 |
+| 4 | Kling 3.0 | Native multi-shot |  | 80.7 | 76.9 | 66.5 | 73.0 | **74.3** | 77.4 |
+| 5 | Wan2.6 | Native multi-shot |  | 87.7 | 77.3 | 57.8 | 61.7 | **71.1** | 77.1 |
+| 6 | Veo3.1 | Native multi-shot |  | 88.5 | 67.7 | 61.9 | 66.1 | **71.1** | - |
+| 7 | Sora2 Pro | Native multi-shot |  | 71.8 | 68.4 | 69.7 | 74.1 | **71.0** | - |
+| 8 | Jimeng3.0 Pro | Native multi-shot |  | 89.4 | 77.0 | 52.1 | 57.2 | **68.9** | - |
+| 9 | HoloCine | Multi-shot specialist | ✓ | 71.5 | 72.6 | 61.0 | 66.0 | **67.8** | 68.6 |
+| 10 | MultiShotMaster | Multi-shot specialist | ✓ | 80.5 | 62.4 | 62.6 | 61.8 | **66.8** | 70.8 |
+| 11 | VideoGen-of-Thought | Multi-shot specialist | ✓ | 89.0 | 54.2 | 52.1 | 44.9 | **60.0** | 60.0 |
+| 12 | Wan2.2 | Conventional T2V | ✓ | 85.5 | 78.7 | 38.7 | 31.0 | **58.5** | 48.5 |
+| 13 | Kling 2.6 | Conventional T2V |  | 85.7 | 75.8 | 35.9 | 18.2 | **53.9** | - |
+| 14 | HunyuanVideo-1.5 | Conventional T2V | ✓ | 81.7 | 75.5 | 34.5 | 19.9 | **52.9** | 46.0 |
+| 15 | Hailuo 2.3 | Conventional T2V |  | 77.9 | 77.3 | 31.9 | 12.1 | **49.8** | - |
 
 ## 📏 Metrics
 
