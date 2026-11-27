@@ -42,14 +42,14 @@ MSBench 检验文生视频系统能否按**多镜头脚本**生成：脚本为�
 
 ## 🛠️ 环境与 🧱 下载
 
-Linux + NVIDIA GPU（单张 48 GB 卡可以跑全部模型）、Python 3.10、CUDA 12.x、FFmpeg。Q-Align 和 DeQA 依赖旧版 `transformers`，各用独立环境，其余都在主环境里。安装命令见英文 README 的 Environment 一节，权重下载：
+Linux + NVIDIA GPU（单张 48 GB 卡可以跑全部模型；其中 FilmOps `camera_movement` 约需 40 GB 显存）、Python 3.10–3.12、CUDA 12.x（Blackwell / `sm_120` 显卡需用 `cu128` 版 PyTorch）、FFmpeg。Q-Align 和 DeQA 依赖旧版 `transformers`，各用独立环境，其余都在主环境里；使用 `uv`（hardlink 缓存）管理时三套环境可共享底层 PyTorch/CUDA 文件，不重复占空间。安装命令见英文 README 的 Environment 一节，权重下载：
 
 ```bash
 bash scripts/setup_third_party.sh   # 克隆 OmniShotCut、TransVLM、DEVIL、dinov2、FilmOps、Q-Align
 bash scripts/download_models.sh     # 约 78 GB 权重，放到 models/（已通过 --include/--exclude 仅下载评测所需子权重）
 ```
 
-> `download_models.sh` 仅拉取 MSBench 实际用到的部分权重（如 `Neo961/FilmOps` 仅下 `shot_scale`、`camera_angle`、`camera_movement`，`DeQA-Score-Mix3` 仅下 `safetensors`）；另外需将 `princeton-vl/RAFT` 的 `raft-things.pth` 手动放进 `models/DEVIL/`。
+> `download_models.sh` 仅拉取 MSBench 实际用到的部分权重（如 `Neo961/FilmOps` 仅下 `shot_scale`、`camera_angle`、`camera_movement` 以及 `shot_scale` 所需的 `dinov2_vitb14_pretrain.pth`，`DeQA-Score-Mix3` 仅下 `safetensors`）；另外需将 `princeton-vl/RAFT` 的 `raft-things.pth` 手动放进 `models/DEVIL/`。
 
 ## 🤖 VLM 评委
 

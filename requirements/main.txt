@@ -23,6 +23,7 @@ insightface==0.7.3
 onnxruntime-gpu==1.23.2
 tqdm
 # third-party runtime (TransVLM, OmniShotCut, FilmOps); torchcodec is replaced by a decord shim, do not install it
+setuptools<81  # DEVIL viclip imports pkg_resources (removed in setuptools 81+)
 ffmpeg-python
 einops
 peft>=0.4.0

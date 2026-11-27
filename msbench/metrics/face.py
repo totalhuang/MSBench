@@ -155,16 +155,44 @@ def detect(a):
         print(k, sum(bool(r['faces']) for r in rows), '/', len(rows), 'frames with faces', round(time.monotonic() - t, 1), 's', flush=True)
 
 
+def _parse_pick(ans, n_boxes, strict=True):
+    ans = (ans or '').strip()
+    m = re.fullmatch(r'(\d+)\.?', ans)
+    if m and int(m.group(1)) <= n_boxes:
+        return int(m.group(1))
+    if strict:
+        return None
+    for pat in (
+        r'(?:final\s+answer|answer|box(?:\s+number)?)\s*[:=\s\*]+(\d+)\b',
+        r'\*\*(\d+)\*\*\s*\.?\s*$',
+        r'(?:^|\n)\s*\**(\d+)\**\s*\.?\s*$',
+    ):
+        ms = re.findall(pat, ans, re.I)
+        if ms and int(ms[-1]) <= n_boxes:
+            return int(ms[-1])
+    last_line = ans.splitlines()[-1] if ans else ''
+    nums = [int(x) for x in re.findall(r'\b(\d+)\b', last_line) if int(x) <= n_boxes]
+    return nums[-1] if nums else None
+
+
 def pick(judge, png, caption, others, n_boxes, retries=2):
-    text = C.prompt('face_som').format(caption=caption, others=('Other people in the video (not the target): ' + ' | '.join(others)) if others else '')
-    content = [judge.image_part(png), {'type': 'text', 'text': text}]
+    base_text = C.prompt('face_som').format(caption=caption, others=('Other people in the video (not the target): ' + ' | '.join(others)) if others else '')
+    img = judge.image_part(png)
     last = None
-    for _ in range(retries + 1):
+    for attempt in range(retries + 1):
+        # Attempt 0 uses the paper setting (greedy, 16 tokens, bare integer). If the VLM writes a verbose
+        # explanation on a crowded frame and gets truncated at 16 tokens (or picks > n_boxes), retry with a
+        # larger token budget and explicit valid range instead of repeating the same truncated greedy output.
+        if attempt == 0:
+            text, max_tok, strict = base_text, 16, True
+        else:
+            text = base_text + f'\nThere are {n_boxes} numbered box(es) (1 to {n_boxes}). Output ONLY one integer from 0 to {n_boxes}.'
+            max_tok, strict = 512, False
         try:
-            ans = judge.chat(content, 'greedy', 16, False)[0]['raw_answer']
-            m = re.fullmatch(r'\s*(\d+)\s*\.?\s*', ans or '')
-            if m and int(m.group(1)) <= n_boxes:
-                return int(m.group(1))
+            ans = judge.chat([img, {'type': 'text', 'text': text}], 'greedy', max_tok, False)[0]['raw_answer']
+            val = _parse_pick(ans, n_boxes, strict=strict)
+            if val is not None:
+                return val
             last = ValueError(f'unusable answer {ans!r} for {n_boxes} boxes')
         except Exception as e:
             last = e
