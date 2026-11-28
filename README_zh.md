@@ -43,14 +43,16 @@ MSBench 检验文生视频系统能否按**多镜头脚本**生成：脚本为�
 
 ## 🛠️ 环境与 🧱 下载
 
-Linux + NVIDIA GPU（单张 48 GB 卡可以跑全部模型；其中 FilmOps `camera_movement` 约需 40 GB 显存）、Python 3.10–3.12、CUDA 12.x（Blackwell / `sm_120` 显卡需用 `cu128` 版 PyTorch）、FFmpeg。Q-Align 和 DeQA 依赖旧版 `transformers`，各用独立环境，其余都在主环境里；使用 `uv`（hardlink 缓存）管理时三套环境可共享底层 PyTorch/CUDA 文件，不重复占空间。安装命令见英文 README 的 Environment 一节，权重下载：
+Linux + NVIDIA GPU（单张 48 GB 卡可以跑全部模型；其中 FilmOps `camera_movement` 约需 40 GB 显存）、Python 3.10–3.12、CUDA 12.x（Blackwell / `sm_120` 显卡需用 `cu128` 版 PyTorch）、带 libx264 的 FFmpeg 和 `bc`（DEVIL 的 temporal entropy 脚本要用，如 `apt install ffmpeg bc`；该分量是压缩后的文件大小，不同 FFmpeg 构建下会略有差异，论文使用 FFmpeg 4.4.2 / Ubuntu 22.04）。Q-Align 和 DeQA 依赖旧版 `transformers`，各用独立环境，其余都在主环境里；使用 `uv`（hardlink 缓存）管理时三套环境可共享底层 PyTorch/CUDA 文件，不重复占空间。安装命令见英文 README 的 Environment 一节，权重下载：
 
 ```bash
 bash scripts/setup_third_party.sh   # 克隆 OmniShotCut、TransVLM、DEVIL、dinov2、FilmOps、Q-Align
 bash scripts/download_models.sh     # 约 78 GB 权重，放到 models/（已通过 --include/--exclude 仅下载评测所需子权重）
 ```
 
-> `download_models.sh` 仅拉取 MSBench 实际用到的部分权重（如 `Neo961/FilmOps` 仅下 `shot_scale`、`camera_angle`、`camera_movement` 以及 `shot_scale` 所需的 `dinov2_vitb14_pretrain.pth`，`DeQA-Score-Mix3` 仅下 `safetensors`）；另外需将 `princeton-vl/RAFT` 的 `raft-things.pth` 手动放进 `models/DEVIL/`。
+> `download_models.sh` 仅拉取 MSBench 实际用到的部分权重（如 `Neo961/FilmOps` 仅下 `shot_scale`、`camera_angle`、`camera_movement` 以及 `shot_scale` 所需的 `dinov2_vitb14_pretrain.pth`，`DeQA-Score-Mix3` 仅下 `safetensors`），并从 `princeton-vl/RAFT` 的发布包里取出 `raft-things.pth`。
+>
+> **离线节点**：有三处上游代码会在首次运行时联网拉小文件——Q-Align 按 hub id 加载 `q-future/one-align` 的 tokenizer，TransVLM 加载 `Study-is-happy/neuflow-v2`，OmniShotCut 加载 torchvision 的 ImageNet ResNet-18。脚本会把它们提前放进 Hugging Face 和 Torch 缓存（`~/.cache/huggingface`、`~/.cache/torch`），之后设置 `HF_HUB_OFFLINE=1` 即可。若设置了指向别处的 `TRANSFORMERS_CACHE`，请 unset：Q-Align/DeQA 环境里的旧版 `transformers` 只会读那个目录，找不到 hub 缓存。
 
 ## 🤖 VLM 评委
 

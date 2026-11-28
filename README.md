@@ -90,7 +90,9 @@ Cross-shot metrics need at least two detected shots; an applicable video without
 
 Tested on Linux with NVIDIA GPUs (one 48 GB GPU runs every model; FilmOps `camera_movement` needs ~40 GB VRAM and
 TransVLM is the next largest), Python 3.10–3.12, CUDA 12.x (Blackwell / `sm_120` GPUs need `cu128` PyTorch wheels) and
-FFmpeg. Q-Align and DeQA pin old `transformers` versions, so they get their own environments; everything else runs in
+FFmpeg with libx264 and `bc` (both used by DEVIL's temporal-entropy script; e.g. `apt install ffmpeg bc`). DEVIL's
+temporal entropy is a compressed-file size, so it shifts slightly across FFmpeg builds; the paper used FFmpeg 4.4.2
+(Ubuntu 22.04). Q-Align and DeQA pin old `transformers` versions, so they get their own environments; everything else runs in
 the main one. With `uv` (`UV_LINK_MODE=hardlink`), all three environments can share one cached PyTorch/CUDA install on
 disk instead of duplicating it three times.
 
@@ -124,8 +126,14 @@ bash scripts/download_models.sh
 
 The script uses `hf download --include` / `--exclude` to fetch only the weights required by MSBench (e.g. only
 `shot_scale`, `camera_angle`, and `camera_movement` from `Neo961/FilmOps`, plus `dinov2_vitb14_pretrain.pth` for
-`shot_scale`, and `safetensors` only from `zhiyuanyou/DeQA-Score-Mix3`). `raft-things.pth` from `princeton-vl/RAFT`
-still needs to be placed in `models/DEVIL/` manually (see `models/README.md`).
+`shot_scale`, and `safetensors` only from `zhiyuanyou/DeQA-Score-Mix3`), plus `raft-things.pth` from the
+`princeton-vl/RAFT` release.
+
+**Offline nodes.** Three upstream packages fetch small files on first use: Q-Align loads the `q-future/one-align`
+tokenizer by hub id, TransVLM loads `Study-is-happy/neuflow-v2`, and OmniShotCut loads torchvision's ImageNet ResNet-18.
+The script puts them into the Hugging Face and Torch caches (`~/.cache/huggingface`, `~/.cache/torch`); then set
+`HF_HUB_OFFLINE=1`. If `TRANSFORMERS_CACHE` points somewhere else, unset it: the old `transformers` in the Q-Align and
+DeQA environments would read only that folder and miss the hub cache.
 
 **Benchmark scripts.** `data/benchmark.json` (300 scripts) ships with the repository; the same scripts are on
 [Hugging Face](https://huggingface.co/datasets/totalhuang/MSBench). Each key is a sample id; a script has `global_context`, `entities_info`, `shot_sequence`
